@@ -1,0 +1,18 @@
+version: '3'
+networks:
+  caddy:
+    external: true
+services:
+  bitwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    environment:
+      - WEBSOCKET_ENABLED=true
+      - SIGNUPS_ALLOWED=false
+    volumes:
+      - ./vw-data/:/data/
+    ports:
+      - 3012:3012
+    restart: unless-stopped
+    networks:
+      - caddy
