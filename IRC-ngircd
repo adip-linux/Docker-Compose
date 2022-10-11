@@ -1,0 +1,22 @@
+---
+version: "2.1"
+
+networks:
+  irc:
+    external: false
+
+services:
+  ngircd:
+    image: lscr.io/linuxserver/ngircd:latest
+    container_name: ngircd
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /home/&/irc/ngircd/config:/config
+#    ports:
+#      - 6667:6667
+    restart: unless-stopped
+    networks:
+      - irc
