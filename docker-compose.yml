@@ -1,0 +1,22 @@
+---
+version: "2"
+
+networks:
+  caddy:
+    external: true
+
+services:
+  homer:
+    image: b4bz/homer
+    #To build from source, comment previous line and uncomment below
+    #build: .
+    container_name: homer
+    networks:
+      - caddy
+    volumes:
+      - /home/l0c0dantes/homer/assets2/:/www/assets
+    ports:
+      - 8082:8080
+    user: 1000:1000 # default
+    environment:
+      - INIT_ASSETS=1 # default
